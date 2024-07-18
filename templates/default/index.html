@@ -1,0 +1,93 @@
+{{ define "default/index.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 黑框+标红 -->
+    <link rel="stylesheet" href="/static/css/base.css">
+</head>
+<body>
+    {{template "public/page_header.html" .}}
+
+    <!-- 导出图片 -->
+    <img src="/static/images/node.jpg" alt="">
+
+    <h2>这是后台首页</h2>
+
+    <!-- 定义变量 -->
+    {{$t := .title}}
+    <br>
+    <h4>
+        {{$t}}
+    </h4>
+
+    <!-- 条件判断 -->
+    {{if ge .score 60}}
+        <p>及格</p>
+    {{else}}
+        <p>不及格</p>
+    {{end}}
+
+    {{if gt .score 90}}
+    <p>优秀</p>
+    {{else if gt .score 80}}
+    <p>良好</p>
+    {{else if gt .score 60}}
+    <p>及格</p>
+    {{else}}
+    <p>不及格</p>
+    {{end}}
+
+    <!-- 循环遍历数据 -->
+    <ul>
+        {{range $key,$value := .hobby}}
+        <li>{{$key}}--{{$value}}</li>
+        {{end}}
+    </ul>
+
+    <br>
+    <ul>
+        {{range $key,$value := .newsList}}
+        <li>{{$key}}--{{$value.Title}}--{{$value.Content}}</li>
+        {{end}}
+    </ul>
+
+    <br>
+    <ul>
+        {{range $key,$value := .testSlice}}
+        <li>{{$key}}--{{$value}}</li>
+        {{else}}
+        <p>切片中没有数据</p>
+        {{end}}
+    </ul>
+
+
+    <!-- with解构结构体 -->
+    <!-- 就是将.new赋值给. -->
+    <p>{{.new.Title}}</p>
+    <p>{{.new.Content}}</p>
+
+    {{with .new}}
+    <h4>{{.Title}}</h4>
+    <h4>{{.Content}}</h4>
+    {{end}}
+
+
+    <!-- 预定义函数（了解） -->
+    <h4>{{len .title}}</h4>
+
+
+    <!-- 自定义模板函数 -->
+    {{.date}}
+    <br>
+    {{UnixToTime .date}}
+    <br>
+    <br>
+    {{Println .title .msg}}
+
+    {{template "public/page_footer.html" .}}
+</body>
+</html>
+{{end}}

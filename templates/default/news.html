@@ -1,0 +1,29 @@
+{{ define "default/news.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+</head>
+<body>
+
+    {{template "public/page_header.html" .}}
+
+    <h2>{{.title}}</h2>
+    <p>
+        {{.news.Title}}
+    </p>
+    <p>
+        {{.news.Content}}
+    </p>
+    <!-- {新闻标题 新闻内容}
+    <p>
+        {{.index.Title}}
+    </p> -->
+
+    {{template "public/page_footer.html" .}}
+</body>
+</html>
+{{ end }}
